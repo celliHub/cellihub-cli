@@ -1,4 +1,7 @@
 # CelliHub CLI
+![Go CI](https://github.com/cellihub/cellihub-cli/actions/workflows/go.yml/badge.svg)
+[![codecov](https://codecov.io/gh/cellihub/cellihub-cli/branch/main/graph/badge.svg)](https://codecov.io/gh/cellihub/cellihub-cli)
+
 
 **CelliHub CLI** is a lightweight command-line interface to help developers quickly scaffold and configure local development environments using **Dev Containers**.
 
