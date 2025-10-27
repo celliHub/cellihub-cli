@@ -4,12 +4,12 @@ import (
 	"fmt"
 	"os"
 
-	"cellihub-cli/internal/cloud/aws"
+	"cellihub-cli/internal/infra/clouds/aws"
 )
 
 func main() {
 	if len(os.Args) < 4 {
-		fmt.Println("cellihub cloud aws devcontainer")
+		fmt.Println("cellihub-cli cloud aws devcontainer")
 		os.Exit(1)
 	}
 
@@ -22,9 +22,9 @@ func main() {
 		if cmd2 == "aws" && cmd3 == "devcontainer" {
 			aws.GenerateDevContainer()
 		} else {
-			fmt.Println("command not found. Try: cellihub cloud aws devcontainer")
+			fmt.Println("command not found. Try: cellihub-cli cloud aws devcontainer")
 		}
 	default:
-		fmt.Println("command not found. Try: cellihub cloud aws devcontainer")
+		fmt.Println("command not found. Try: cellihub-cli cloud aws devcontainer")
 	}
 }
