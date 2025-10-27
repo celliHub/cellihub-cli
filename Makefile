@@ -1,5 +1,8 @@
-all:
-	@echo "Building all targets..."
+all: fmt build
+	@echo "All tasks completed."
+
+build:
+	@echo "Building application..."
 	go build -o cellihub-cli main.go
 
 fmt:
