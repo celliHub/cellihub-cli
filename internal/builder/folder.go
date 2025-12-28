@@ -6,10 +6,10 @@ import (
 )
 
 func (g *Generator) CreateFolder(dirName string) {
-	FullPathFolder := os.Getenv("PWD") + "/" + dirName
-	log.Println("Creating folder:", FullPathFolder)
+	fullPathFolder := os.Getenv("PWD") + "/" + dirName
+	log.Println("Creating folder:", fullPathFolder)
 
-	if err := os.Mkdir(FullPathFolder, 0755); err != nil {
+	if err := os.Mkdir(fullPathFolder, 0755); err != nil {
 		log.Println("Error creating folder:", err)
 		log.Fatal("Failed to create folder. Recommended remove .devcontainer folder if exists and try again.")
 		os.Exit(1)
