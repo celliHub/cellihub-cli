@@ -2,21 +2,41 @@ package builder
 
 import (
 	"cellihub-cli/internal/templates/cloud"
+	"cellihub-cli/internal/templates/light"
 	"log"
 	"os"
 	"strings"
 )
 
-func (g *Generator) CreateFiles(files []string, category string) {
+type Template struct {
+	Category string
+	Files    []string
+	Content  map[string]string
+}
 
-	for i, f := range files {
+func (g *Generator) CreateFiles(category string) {
+
+	t := Template{}
+
+	switch strings.ToLower(category) {
+	case "cloud":
+		t = Template(cloud.CloudTemplate)
+	case "light":
+		t = Template(light.LightTemplate)
+	default:
+		log.Fatalf("Unsupported category for files: %s", category)
+	}
+
+	for i, f := range t.Files {
 
 		var ContentFile string
 		switch f {
 		case "devcontainer.json":
-			ContentFile = cloud.DevcontainerContent
+			ContentFile = t.Content["devcontainer.json"]
 		case "Dockerfile":
-			ContentFile = cloud.DockerfileContent
+			ContentFile = t.Content["Dockerfile"]
+		case "post-commands.sh":
+			ContentFile = t.Content["post-commands.sh"]
 		default:
 			log.Println("File not recognized:", f)
 			continue
