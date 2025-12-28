@@ -8,7 +8,8 @@ import (
 	"strings"
 )
 
-var supportedCategories = []string{"cloud", "golang", "javascript", "python"}
+// Add new supported categories here
+var supportedCategories = []string{"cloud", "light"}
 
 func usage() {
 	fmt.Println("Usage: cellihub-cli <command> <category>")
@@ -59,7 +60,6 @@ func main() {
 			os.Exit(1)
 		}
 
-		// Build devcontainer
 		b := builder.NewBuilder()
 		// folder name is fixed for now to keep compatibility with templates
 		folderName := ".devcontainer"
@@ -67,8 +67,7 @@ func main() {
 		b.CreateFolder(folderName)
 		b.CheckFolder()
 
-		files := []string{"devcontainer.json", "Dockerfile"}
-		b.CreateFiles(files, category)
+		b.CreateFiles(category)
 		log.Println("Devcontainer generation finished.")
 
 	case "help", "-h", "--help":
