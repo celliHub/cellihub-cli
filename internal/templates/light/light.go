@@ -58,7 +58,7 @@ session-manager-plugin --version
 echo "Post-commands script completed."`
 
 var LightTemplate = Template{
-	Category: "cloud",
+	Category: "light",
 	Files:    []string{"devcontainer.json", "post-commands.sh"},
 	Content: map[string]string{
 		"devcontainer.json": DevcontainerContent,
