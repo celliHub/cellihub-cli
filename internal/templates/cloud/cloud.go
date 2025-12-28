@@ -72,7 +72,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 ARG DOCKER_GID=80
-RUN groupadd -for -g ${DOCKER_GID} docker && usermod -aG docker vscode
+RUN groupadd -f -g ${DOCKER_GID} docker && usermod -aG docker vscode
 
 # -----------------------------
 # Install Golang
