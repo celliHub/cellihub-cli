@@ -1,0 +1,67 @@
+package light
+
+type Template struct {
+	Category string
+	Files    []string
+	Content  map[string]string
+}
+
+var DevcontainerContent = `{
+  "name": "%PROJECT_NAME% Dev Container",
+  "image": "devcontainer:v1.0.0",
+  "containerUser": "vscode",
+  "remoteUser": "vscode",
+  "updateRemoteUserUID": true,
+  "mounts": [
+    "source=global-vscode-server,target=/vscode/vscode-server,type=volume",
+    "source=global-vscode-extensions,target=/vscode/vscode-extensions,type=volume",
+    "source=${localWorkspaceFolder},target=/workspace,type=bind"
+  ],
+  "remoteEnv": {
+    "VSCODE_SERVER_DIR": "/vscode/vscode-server",
+    "VSCODE_EXTENSIONS_DIR": "/vscode/vscode-extensions"
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {},
+    "ghcr.io/devcontainers/features/terraform:1": {
+      "version": "latest"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.shell.linux": "/bin/bash"
+      },
+      "extensions": [
+        "golang.go",
+        "hashicorp.terraform",
+        "ms-python.python",
+        "esbenp.prettier-vscode",
+        "amazonwebservices.aws-toolkit-vscode",
+        "ms-azuretools.vscode-docker"
+      ]
+    }
+  },
+  "runArgs": [
+    "--name=dev-${localWorkspaceFolderBasename}"
+  ],
+  "postStartCommand": "./.devcontainer/post-commands.sh"
+}`
+
+var PostCommandsContent = `#!/bin/bash
+echo "Post-commands script."
+
+aws --version
+terraform --version
+session-manager-plugin --version
+    
+echo "Post-commands script completed."`
+
+var LightTemplate = Template{
+	Category: "cloud",
+	Files:    []string{"devcontainer.json", "post-commands.sh"},
+	Content: map[string]string{
+		"devcontainer.json": DevcontainerContent,
+		"post-commands.sh":  PostCommandsContent,
+	},
+}
