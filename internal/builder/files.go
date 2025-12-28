@@ -58,9 +58,9 @@ func (g *Generator) CreateFiles(category string) {
 
 		// Write content to the file
 		// %PROJECT_NAME%
-		ProjectFolderName := strings.Split(FilePath, string(os.PathSeparator))
-		Content := strings.ReplaceAll(file.Content, "%PROJECT_NAME%", ProjectFolderName[len(ProjectFolderName)-1])
-		if err := os.WriteFile(FileFullPath, []byte(Content), 0644); err != nil {
+		projectFolderName := strings.Split(FilePath, string(os.PathSeparator))
+		content := strings.ReplaceAll(file.Content, "%PROJECT_NAME%", projectFolderName[len(projectFolderName)-1])
+		if err := os.WriteFile(FileFullPath, []byte(content), 0644); err != nil {
 			log.Println("Error writing to file:", err)
 			panic("Could not write to file")
 		}
