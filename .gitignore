@@ -1,0 +1,10 @@
+# Build artifacts
+cellihub-cli
+cellihub-cli-*
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store

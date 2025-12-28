@@ -29,14 +29,14 @@ func (g *Generator) CreateFiles(category string) {
 
 	for i, f := range t.Files {
 
-		var ContentFile string
+		var contentFile string
 		switch f {
 		case "devcontainer.json":
-			ContentFile = t.Content["devcontainer.json"]
+			contentFile = t.Content["devcontainer.json"]
 		case "Dockerfile":
-			ContentFile = t.Content["Dockerfile"]
+			contentFile = t.Content["Dockerfile"]
 		case "post-commands.sh":
-			ContentFile = t.Content["post-commands.sh"]
+			contentFile = t.Content["post-commands.sh"]
 		default:
 			log.Println("File not recognized:", f)
 			continue
@@ -44,23 +44,23 @@ func (g *Generator) CreateFiles(category string) {
 
 		file := File{
 			Name:    f,
-			Content: ContentFile,
+			Content: contentFile,
 		}
 
-		FilePath, _ := os.Getwd()
-		FileFullPath := FilePath + string(os.PathSeparator) + ".devcontainer" + string(os.PathSeparator) + file.Name
-		log.Printf("[%d]Creating file: %s", i, FileFullPath)
+		filePath, _ := os.Getwd()
+		fileFullPath := filePath + string(os.PathSeparator) + ".devcontainer" + string(os.PathSeparator) + file.Name
+		log.Printf("[%d]Creating file: %s", i, fileFullPath)
 
-		if _, err := os.Create(FileFullPath); err != nil {
+		if _, err := os.Create(fileFullPath); err != nil {
 			log.Println("Error creating file:", err)
 			panic("Could not create file")
 		}
 
 		// Write content to the file
 		// %PROJECT_NAME%
-		projectFolderName := strings.Split(FilePath, string(os.PathSeparator))
+		projectFolderName := strings.Split(filePath, string(os.PathSeparator))
 		content := strings.ReplaceAll(file.Content, "%PROJECT_NAME%", projectFolderName[len(projectFolderName)-1])
-		if err := os.WriteFile(FileFullPath, []byte(content), 0644); err != nil {
+		if err := os.WriteFile(fileFullPath, []byte(content), 0644); err != nil {
 			log.Println("Error writing to file:", err)
 			panic("Could not write to file")
 		}
