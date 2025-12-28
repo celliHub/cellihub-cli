@@ -12,7 +12,6 @@ func (g *Generator) CreateFolder(dirName string) {
 	if err := os.Mkdir(fullPathFolder, 0755); err != nil {
 		log.Println("Error creating folder:", err)
 		log.Fatal("Failed to create folder. Recommended remove .devcontainer folder if exists and try again.")
-		os.Exit(1)
 	}
 
 	g.Directory = dirName
